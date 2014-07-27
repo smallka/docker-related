@@ -10,7 +10,6 @@ ADD .tmux.conf /root/
 
 # gdb
 RUN apt-get -qqy install gdb
-ADD gdb_printers.tar /root/
 ADD .gdbinit /root/
 
 # valgrind

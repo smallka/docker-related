@@ -1,15 +1,17 @@
 #   Python libstdc++ printers 
 #
-#   1. mkdir /root/gdb_printers
-#   2. cd /root/gdb_printers
-#   3. svn co svn://gcc.gnu.org/svn/gcc/trunk/libstdc++-v3/python
+#   svn co svn://gcc.gnu.org/svn/gcc/trunk/libstdc++-v3/python
 #
 python
-import sys
-sys.path.insert(0, '/root/gdb_printers/python')
-from libstdcxx.v6.printers import register_libstdcxx_printers
-register_libstdcxx_printers (None)
-print '.gdbinit: libstdcxx printers loaded'
+import sys, os, os.path
+dir = '/vagrant/docker-related/.gdb'
+if os.path.exists(dir):
+    sys.path.insert(0, dir)
+    from printers import register_libstdcxx_printers
+    register_libstdcxx_printers (None)
+    print 'INFO: libstdcxx printers loaded'
+else:
+    print 'WARNING: libstdcxx printers not exists "%s"' % dir
 end
 
 #                                                                                                       
@@ -706,3 +708,4 @@ set print vtbl on
 set print demangle on
 set demangle-style gnu-v3
 set print sevenbit-strings off
+
